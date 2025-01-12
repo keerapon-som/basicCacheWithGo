@@ -35,3 +35,7 @@ func (c *cache) Get(key string, receiver interface{}) error {
 	}
 	return json.Unmarshal([]byte(val), receiver)
 }
+
+func (c *cache) Delete(key string) error {
+	return c.redisClient.Del(c.ctx, key).Err()
+}

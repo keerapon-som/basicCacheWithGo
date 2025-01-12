@@ -50,3 +50,11 @@ func (m *memoryCache) Get(key string, receiver interface{}) error {
 
 	return json.Unmarshal(item.value, receiver)
 }
+
+func (m *memoryCache) Delete(key string) error {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+
+	delete(m.data, key)
+	return nil
+}
